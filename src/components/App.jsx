@@ -1,49 +1,20 @@
 import React from 'react';
-
-const FeedbackOptions = ({ options, onLeaveFeedback }) => (
-  <div>
-    {options.map(option => (
-      <button key={option} onClick={() => onLeaveFeedback(option)}>
-        {option}
-      </button>
-    ))}
-  </div>
-);
-
-const Statistics = ({ good, neutral, bad, total, positivePercentage }) => (
-  <div>
-    <p>Good: {good}</p>
-    <p>Neutral: {neutral}</p>
-    <p>Bad: {bad}</p>
-    <p>Total: {total}</p>
-    <p>Positive Feedback: {positivePercentage}%</p>
-  </div>
-);
-
-const Section = ({ title, children }) => (
-  <div>
-    <h1>{title}</h1>
-    {children}
-  </div>
-);
-
-const Notification = ({ message }) => <p>{message}</p>;
+import FeedbackOptions from './FeedbackOptions';
+import Statistics from './Statistics';
+import Section from './Section';
+import Notification from './Notification';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      good: 0,
-      neutral: 0,
-      bad: 0,
-    };
-  }
+  state = {
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  };
 
   handleFeedback = type => {
-    this.setState(prevState => ({
-      ...prevState,
-      [type]: prevState[type] + 1,
-    }));
+    this.setState({
+      [type]: this.state[type] + 1,
+    });
   };
 
   countTotalFeedback = () => {
